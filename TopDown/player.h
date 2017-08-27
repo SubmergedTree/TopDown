@@ -11,6 +11,6 @@ public:
 	void move();
 	void update(float deltaTime);
 private:
-	Animation animation;
+	//Animation animation;
 };
 
