@@ -2,13 +2,14 @@
 #include <map>
 #include <memory>
 #include <string>
-#include <tuple>
+//#include <tuple>
 
-#include "BaseEntity.h"
 #include <queue>
 #include <SFML\Window.hpp>
 #include "Framework.h"
+#include "TiledMap.h"
 
+class BaseEntity;
 
 class EntityManager
 {
@@ -18,10 +19,7 @@ public:
 	~EntityManager();
 
 	void insertEntity(std::shared_ptr<BaseEntity> toInsert);
-
-	//bool collideWith(std::shared_ptr<BaseEntity> entity);
-	//bool collideWith(std::shared_ptr<BaseEntity> entity);
-
+	void testBla();
 private:
 
 	void render();
@@ -31,14 +29,14 @@ private:
 
 	struct Comperator
 	{
-		bool operator()(std::shared_ptr<BaseEntity> a, std::shared_ptr<BaseEntity> b)
-		{
-			return a->getRenderPos() > b->getRenderPos();
-		}
+		bool operator()(std::shared_ptr<BaseEntity> a, std::shared_ptr<BaseEntity> b);
 	};
 
 	std::priority_queue<std::shared_ptr<BaseEntity>, std::vector<std::shared_ptr<BaseEntity>>, Comperator> renderSequence;
-
+	
 	sf::RenderWindow& window;
+
+	TiledMap tiledForeground;
+	TiledMap tiledBackground;
 };
 

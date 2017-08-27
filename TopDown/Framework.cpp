@@ -1,8 +1,9 @@
 #include "Framework.h"
 #include "player.h"
-#include "TextureManager.h"
+#include "Obstacle.h"
 #include <SFML/Graphics.hpp>
 
+#include "TextureManager.h"
 
 
 Framework::Framework()
@@ -20,20 +21,24 @@ Framework::~Framework()
 void Framework::run()
 {
 	TextureManager textureManager;
-	textureManager.loadTexture("images/image.png", "dragon");
-	textureManager.loadTexture("images/stone.png", "stone");
-
-	std::shared_ptr<Player> p1(std::make_shared<Player>(*textureManager.getTexture("dragon"), sf::Vector2f(0.3, 0.3)));
+	textureManager.loadTexture("images/dragonAnim.png", "dragon");
+	textureManager.loadTexture("images/bild.jpg", "stone");
+	EntityManager entityManager(*window);
+	std::shared_ptr<Player> p1(std::make_shared<Player>(*textureManager.getTexture("dragon"), sf::Vector2f(3, 3),&entityManager));
 	p1->setRenderPos(2);
-	std::shared_ptr<Player> p2(std::make_shared<Player>(*textureManager.getTexture("stone"), sf::Vector2f(0.3, 0.3)));
+	std::shared_ptr<Obstacle> p2(std::make_shared<Obstacle>(*textureManager.getTexture("stone"), sf::Vector2f(1, 1), &entityManager));
 	p2->setRenderPos(1);
 
-	EntityManager entityManager(*window);
+	p2->setPosition(sf::Vector2f(100, 100));
+
 	entityManager.insertEntity(p1);
 	entityManager.insertEntity(p2);
 
+	float oldTime = 0;
+	float newTime = 0;
+	float deltaTime;
 	sf::Clock clock;
-	sf::Time start = clock.getElapsedTime();
+
 	while (window->isOpen())
 	{
 		sf::Event event;
@@ -43,8 +48,11 @@ void Framework::run()
 				window->close();
 		}
 
+		oldTime = newTime;
+		newTime = clock.getElapsedTime().asMilliseconds();
+		deltaTime = newTime - oldTime;
+		//std::cout << newTime << std::endl;
 		window->clear();
-		float deltaTime = clock.getElapsedTime().asMilliseconds() - start.asMilliseconds();
 		entityManager.update(deltaTime);
 		entityManager.render();
 		window->display();

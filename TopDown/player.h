@@ -3,14 +3,13 @@
 #include "BaseEntity.h"
 #include "Animation.h"
 
-class Player:public BaseEntity
+class Player :public BaseEntity
 {
 public:
-	Player(const sf::Texture  & texture, sf::Vector2f &size);
+	Player(const sf::Texture  & texture, sf::Vector2f &size, EntityManager * eM);
 	~Player();
-	void move();
 	void update(float deltaTime);
 private:
-	//Animation animation;
+	Animation animation;
 };
 

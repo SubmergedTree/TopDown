@@ -2,7 +2,7 @@
 
 
 
-BaseEntity::BaseEntity(const sf::Texture  & texture, sf::Vector2f &size) : sprite(texture), tag("")
+BaseEntity::BaseEntity(const sf::Texture  & texture, sf::Vector2f &size, EntityManager* eM) : sprite(texture), tag(""), entityManager(eM)
 {
 	sprite.scale(size);
 }
@@ -27,9 +27,9 @@ void BaseEntity::setRenderPos(int rPos)
 	renderPos = rPos;
 }
 
-sf::Sprite BaseEntity::getSprite()
+sf::Sprite* BaseEntity::getSprite()
 {
-	return sprite;
+	return &sprite;
 }
 
 int BaseEntity::getRenderPos()

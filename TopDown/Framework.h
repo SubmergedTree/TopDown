@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "EntityManager.h"
 
-class Framework 
+class Framework
 {
 public:
 	Framework();

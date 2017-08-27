@@ -1,10 +1,17 @@
 #include "Animation.h"
+#include <iostream>
 
 
-
-Animation::Animation(sf::Sprite * sprite) : animatedSprite(sprite)
+Animation::Animation(sf::Sprite * sprite, float switchAnimationTime) : 
+	animatedSprite(sprite), switchAnimationTime(switchAnimationTime), currentTime(0), textureRectIndex(0)
 {
-}//sds
+	currentAnimation = animationContainer.find(" ");
+}
+
+Animation::Animation()
+{
+	currentAnimation = animationContainer.find(" ");
+}
 
 Animation::~Animation()
 {
@@ -15,7 +22,7 @@ void Animation::applyAnimation(std::string key)
 	auto iterator = animationContainer.find(key);
 	if (iterator != animationContainer.end())
 	{
-		animatedSprite->setTextureRect(iterator->second);
+		this->currentAnimation = iterator;
 	}
 	else
 	{
@@ -23,12 +30,53 @@ void Animation::applyAnimation(std::string key)
 	}
 }
 
-void Animation::storeAnimation(std::string key, const sf::IntRect & textureArea)
+void Animation::storeAnimation(std::string key,std::vector<sf::IntRect> animations)
 {
-	animationContainer.insert(std::pair<std::string, sf::IntRect>(key, textureArea));
+	animationContainer.insert(std::pair<std::string, std::vector<sf::IntRect>>(key, animations));
 }
 
-void Animation::storeAnimation(std::string key, int x, int y, int w, int h)
+void Animation::setSprite(sf::Sprite * sprite)
 {
-	animationContainer.insert(std::pair<std::string, sf::IntRect>(key, sf::IntRect(x,y,w,h)));
+	this->animatedSprite = sprite;
+}
+
+void Animation::setSwitchAnimationTime(float switchAnimationTime)
+{
+	this->switchAnimationTime = switchAnimationTime;
+}
+
+void Animation::setDefault(sf::IntRect rect)
+{
+	animatedSprite->setTextureRect(rect);
+}
+
+void Animation::update()
+{
+
+	if (currentAnimation != animationContainer.end())
+	{
+		if (clock.getElapsedTime().asMilliseconds() > switchAnimationTime)
+		{
+
+			if (textureRectIndex >= currentAnimation->second.size())
+			{
+				textureRectIndex = 0;
+			}
+			else
+			{
+				textureRectIndex++;
+			}
+			clock.restart();
+		}
+
+		if (textureRectIndex < currentAnimation->second.size())
+		{
+			animatedSprite->setTextureRect(currentAnimation->second.at(textureRectIndex));
+		}
+	}
+	else
+	{
+		std::cout << "bad iterator" << std::endl;
+	}
+	
 }

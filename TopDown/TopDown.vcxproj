@@ -18,6 +18,30 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Animation.h" />
+    <ClInclude Include="BaseEntity.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EntityManager.h" />
+    <ClInclude Include="Framework.h" />
+    <ClInclude Include="Obstacle.h" />
+    <ClInclude Include="Orientation.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="TiledMap.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="BaseEntity.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EntityManager.cpp" />
+    <ClCompile Include="Framework.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Obstacle.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="TiledMap.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{E7A50AC5-70BA-4C07-BD12-E2EC525C7805}</ProjectGuid>
@@ -150,25 +174,6 @@
       <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="Animation.cpp" />
-    <ClCompile Include="BaseEntity.cpp" />
-    <ClCompile Include="Enemy.cpp" />
-    <ClCompile Include="EntityManager.cpp" />
-    <ClCompile Include="Framework.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="player.cpp" />
-    <ClCompile Include="TextureManager.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Animation.h" />
-    <ClInclude Include="BaseEntity.h" />
-    <ClInclude Include="Enemy.h" />
-    <ClInclude Include="EntityManager.h" />
-    <ClInclude Include="Framework.h" />
-    <ClInclude Include="player.h" />
-    <ClInclude Include="TextureManager.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
