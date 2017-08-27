@@ -4,7 +4,7 @@
 
 Animation::Animation(sf::Sprite * sprite) : animatedSprite(sprite)
 {
-}
+}//sds
 
 Animation::~Animation()
 {
