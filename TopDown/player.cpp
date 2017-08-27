@@ -4,7 +4,7 @@
 
 Player::Player(const sf::Texture  & texture, sf::Vector2f &size) : BaseEntity(texture,size)
 {	
-	//hsfdiadghgh
+	//hsfdiadghghsdsds
 }
 
 
