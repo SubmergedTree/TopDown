@@ -18,7 +18,6 @@ public:
 
 	virtual void update(float deltaTime) = 0;
 
-
 	sf::Sprite* getSprite();
 	int getRenderPos();
 	std::string getTag();
@@ -34,5 +33,37 @@ private:
 	bool inForeground;
 protected:
 	EntityManager* entityManager;
+
+	void setWidth(int width);
+	void setHeight(int height);
+	void setWidthHeight(int width, int height);
+
+	int getWidth();
+	int getHeight();
 };
 
+class BaseEntityExp
+{
+public:
+	BaseEntityExp();
+
+	void setEntityManager(EntityManager* entityManager);
+
+	virtual ~BaseEntityExp();
+
+	virtual void onCreate() = 0;
+	virtual void masterUpdate(float deltaTime);
+
+	virtual bool isRenderable();
+	virtual sf::Sprite* getSprite();
+	virtual int getRenderPos();
+
+	std::string& getTag();
+	void setTag(const std::string &tag);
+
+protected:
+	virtual void update(float deltaTime) = 0;
+	EntityManager* entityManager;
+private:
+	std::string tag;
+};

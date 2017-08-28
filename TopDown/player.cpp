@@ -13,6 +13,8 @@ Player::Player(const sf::Texture  & texture, sf::Vector2f &size,EntityManager * 
 	walkDown.push_back(sf::IntRect(200, 0, 100, 100));
 	animation.storeAnimation("walkDown",walkDown);
 	animation.setDefault(sf::IntRect(0, 0, 100, 100));
+
+	setWidthHeight(800, 600);
 }
 
 Player::~Player()
@@ -21,14 +23,7 @@ Player::~Player()
 
 void Player::update(float deltaTime)
 {
-	std::cout << getSprite()->getGlobalBounds().width << std::endl;
-	
-	getSprite()->setScale(
-		100 / getSprite()->getLocalBounds().width,
-		100 / getSprite()->getLocalBounds().height);
-
-
-
+	std::cout << getWidth() << " " << getHeight() << std::endl;
 
 	//entityManager->testBla();
 	animation.setDefault(sf::IntRect(0, 0, 100, 100));
@@ -50,5 +45,5 @@ void Player::update(float deltaTime)
 		getSprite()->move(0, 1 * deltaTime);
 	}
 	//std::cout << deltaTime << std::endl;
-	animation.update();
+	animation.update(100,100);
 }

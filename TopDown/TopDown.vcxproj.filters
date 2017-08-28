@@ -45,6 +45,15 @@
     <ClInclude Include="TiledMap.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="AnimatedEntity.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteEntity.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimatedEntityTest.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp">
@@ -75,6 +84,15 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="TiledMap.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatedEntity.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteEntity.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatedEntityTest.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>

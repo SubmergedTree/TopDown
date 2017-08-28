@@ -9,7 +9,7 @@
 #include "Framework.h"
 #include "TiledMap.h"
 
-class BaseEntity;
+class BaseEntityExp;
 
 class EntityManager
 {
@@ -18,21 +18,21 @@ public:
 	EntityManager(sf::RenderWindow & window);
 	~EntityManager();
 
-	void insertEntity(std::shared_ptr<BaseEntity> toInsert);
+	void insertEntity(std::shared_ptr<BaseEntityExp> toInsert);
 	void testBla();
 private:
 
 	void render();
 	void update(float deltaTime);
 
-	std::map<std::string, std::vector<std::shared_ptr<BaseEntity>>> entities;
+	std::map<std::string, std::vector<std::shared_ptr<BaseEntityExp>>> entities;
 
 	struct Comperator
 	{
-		bool operator()(std::shared_ptr<BaseEntity> a, std::shared_ptr<BaseEntity> b);
+		bool operator()(std::shared_ptr<BaseEntityExp> a, std::shared_ptr<BaseEntityExp> b);
 	};
 
-	std::priority_queue<std::shared_ptr<BaseEntity>, std::vector<std::shared_ptr<BaseEntity>>, Comperator> renderSequence;
+	std::priority_queue<std::shared_ptr<BaseEntityExp>, std::vector<std::shared_ptr<BaseEntityExp>>, Comperator> renderSequence;
 	
 	sf::RenderWindow& window;
 

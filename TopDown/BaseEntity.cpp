@@ -4,7 +4,8 @@
 
 BaseEntity::BaseEntity(const sf::Texture  & texture, sf::Vector2f &size, EntityManager* eM) : sprite(texture), tag(""), entityManager(eM)
 {
-	sprite.scale(size);
+	this->setWidthHeight(size.x,size.y);
+	//sprite.scale(size);
 }
 
 
@@ -42,3 +43,80 @@ std::string BaseEntity::getTag()
 	return tag;
 }
 
+void BaseEntity::setWidth(int width)
+{
+	sprite.setScale(
+		width / getSprite()->getLocalBounds().width,
+		this->width / getSprite()->getLocalBounds().height);
+}
+
+void BaseEntity::setHeight(int height)
+{
+	sprite.setScale(
+		this->height / getSprite()->getLocalBounds().width,
+		height / getSprite()->getLocalBounds().height);
+}
+
+void BaseEntity::setWidthHeight(int width, int height)
+{
+	sprite.setScale(
+		width / getSprite()->getLocalBounds().width,
+		height / getSprite()->getLocalBounds().height);
+}
+
+int BaseEntity::getWidth()
+{
+	return getSprite()->getGlobalBounds().width;
+}
+
+int BaseEntity::getHeight()
+{
+	return getSprite()->getGlobalBounds().height;
+}
+
+
+
+
+BaseEntityExp::BaseEntityExp()
+{
+}
+
+void BaseEntityExp::setEntityManager(EntityManager * entityManager)
+{
+	this->entityManager = entityManager;
+}
+
+BaseEntityExp::~BaseEntityExp()
+{
+	entityManager = nullptr;
+}
+
+void BaseEntityExp::masterUpdate(float deltaTime)
+{
+	update(deltaTime);
+}
+
+bool BaseEntityExp::isRenderable()
+{
+	return false;
+}
+
+sf::Sprite* BaseEntityExp::getSprite()
+{
+	return nullptr;
+}
+
+int BaseEntityExp::getRenderPos()
+{
+	return 0;
+}
+
+std::string & BaseEntityExp::getTag()
+{
+	return tag;
+}
+
+void BaseEntityExp::setTag(const std::string & tag)
+{
+	this->tag = tag;
+}

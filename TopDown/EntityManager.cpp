@@ -2,7 +2,7 @@
 
 #include "BaseEntity.h"
 
-typedef std::pair<std::string, std::vector<std::shared_ptr<BaseEntity>>> lmPair;
+typedef std::pair<std::string, std::vector<std::shared_ptr<BaseEntityExp>>> lmPair;
 
 
 
@@ -15,8 +15,9 @@ EntityManager::~EntityManager()
 {
 }
 
-void EntityManager::insertEntity(std::shared_ptr<BaseEntity> toInsert)
+void EntityManager::insertEntity(std::shared_ptr<BaseEntityExp> toInsert)
 {
+	toInsert->onCreate();
 	auto it = entities.find(toInsert->getTag());
 	if (it != entities.end())
 	{
@@ -24,7 +25,7 @@ void EntityManager::insertEntity(std::shared_ptr<BaseEntity> toInsert)
 	}
 	else
 	{
-		std::vector<std::shared_ptr<BaseEntity>> newVector;
+		std::vector<std::shared_ptr<BaseEntityExp>> newVector;
 		newVector.push_back(toInsert);
 		entities.insert(lmPair(toInsert->getTag(),newVector));
 	}
@@ -53,14 +54,15 @@ void EntityManager::update(float deltaTime)
 	{
 		for (auto it2 : it.second)
 		{
-			it2->update(deltaTime);
+			it2->masterUpdate(deltaTime);
 
-			renderSequence.push(it2);
+			if(it2->isRenderable())
+				renderSequence.push(it2);
 		}
 	}
 }
 
-bool EntityManager::Comperator::operator()(std::shared_ptr<BaseEntity> a, std::shared_ptr<BaseEntity> b)
+bool EntityManager::Comperator::operator()(std::shared_ptr<BaseEntityExp> a, std::shared_ptr<BaseEntityExp> b)
 {
 	return a->getRenderPos() > b->getRenderPos();
 }

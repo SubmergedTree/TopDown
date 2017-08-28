@@ -15,7 +15,7 @@ public:
 	void setSprite(sf::Sprite * sprite);
 	void setSwitchAnimationTime(float switchAnimationTime);
 	void setDefault(sf::IntRect rect);
-	void update();
+	void update(int width, int height);
 private:
 	sf::Sprite * animatedSprite;
 	std::map<std::string, std::vector<sf::IntRect>> animationContainer;

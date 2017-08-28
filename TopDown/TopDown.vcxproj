@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AnimatedEntity.h" />
+    <ClInclude Include="AnimatedEntityTest.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="BaseEntity.h" />
     <ClInclude Include="Enemy.h" />
@@ -27,10 +29,13 @@
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="Orientation.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="SpriteEntity.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="TiledMap.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AnimatedEntity.cpp" />
+    <ClCompile Include="AnimatedEntityTest.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="BaseEntity.cpp" />
     <ClCompile Include="Enemy.cpp" />
@@ -39,6 +44,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="SpriteEntity.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="TiledMap.cpp" />
   </ItemGroup>

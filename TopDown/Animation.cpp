@@ -50,7 +50,7 @@ void Animation::setDefault(sf::IntRect rect)
 	animatedSprite->setTextureRect(rect);
 }
 
-void Animation::update()
+void Animation::update(int width, int height)
 {
 
 	if (currentAnimation != animationContainer.end())
