@@ -60,10 +60,12 @@ public:
 
 	std::string& getTag();
 	void setTag(const std::string &tag);
-
+	void deleteEntity();
+	bool shouldBeDeleted();
 protected:
 	virtual void update(float deltaTime) = 0;
 	EntityManager* entityManager;
 private:
 	std::string tag;
+	bool toDelete;
 };

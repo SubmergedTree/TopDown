@@ -68,6 +68,7 @@ void AnimatedEntity::animationUpdate()
 		if (textureRectIndex < currentAnimation->second.size())
 		{
 			sprite.setTextureRect(currentAnimation->second.at(textureRectIndex));
+			setWidthHeight(worldPosition.width, worldPosition.height);
 		}
 	}
 	else

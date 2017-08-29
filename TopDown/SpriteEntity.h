@@ -12,9 +12,12 @@ public:
 	void setTexture(const sf::Texture  & texture);
 
 	void setRenderPos(int renderPos);
-	void setPosition(sf::Vector2f pos);
+	void setTiledPosition(unsigned int xCoord, unsigned int yCoord, unsigned int widthAmountOfTiles, unsigned int heightAmountOfTiles);
 	bool isRenderable();
+	void setIsOnTileMap();
+	bool getIsOnTileMap();
 
+	Coord& getTiledMapPosition();
 protected:
 	void setWidthHeight(int width, int height);
 
@@ -22,8 +25,12 @@ protected:
 	int getHeight();
 
 	sf::Sprite sprite;
+
+	Coord worldPosition;
+	Coord tiledPosition;
+
 private:
 	int renderPos;
-
+	bool isOnTileMap;
 };
 

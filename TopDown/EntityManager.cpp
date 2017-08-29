@@ -1,6 +1,7 @@
 #include "EntityManager.h"
 
 #include "BaseEntity.h"
+#include "SpriteEntity.h"
 
 typedef std::pair<std::string, std::vector<std::shared_ptr<BaseEntityExp>>> lmPair;
 
@@ -30,11 +31,17 @@ void EntityManager::insertEntity(std::shared_ptr<BaseEntityExp> toInsert)
 		entities.insert(lmPair(toInsert->getTag(),newVector));
 	}
 
+	if (toInsert->isRenderable())
+	{
+		std::shared_ptr<SpriteEntity> spriteEntity = std::static_pointer_cast<SpriteEntity>(toInsert);
+		Coord tmpCoord = spriteEntity->getTiledMapPosition();
+		tiledForeground.insert(toInsert->getTag(),tmpCoord);
+	}
 }
-#include <iostream>
-void EntityManager::testBla()
+
+Coord EntityManager::fromTiledToWorldCoordinates(unsigned int xCoord, unsigned int yCoord, unsigned int widthAmountOfTiles, unsigned int heightAmountOfTiles)
 {
-	//std::cout << "Bla" << std::endl;
+	return tiledForeground.getRealCoordinates(xCoord, yCoord,widthAmountOfTiles, heightAmountOfTiles);
 }
 
 void EntityManager::render()
@@ -58,6 +65,11 @@ void EntityManager::update(float deltaTime)
 
 			if(it2->isRenderable())
 				renderSequence.push(it2);
+
+			if (it2->shouldBeDeleted())
+			{
+				//delete this entity from container
+			}
 		}
 	}
 }

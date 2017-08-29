@@ -19,7 +19,9 @@ public:
 	~EntityManager();
 
 	void insertEntity(std::shared_ptr<BaseEntityExp> toInsert);
-	void testBla();
+
+	Coord fromTiledToWorldCoordinates(unsigned int xCoord, unsigned int yCoord, unsigned int widthAmountOfTiles, unsigned int heightAmountOfTiles);
+
 private:
 
 	void render();
