@@ -8,7 +8,7 @@ typedef std::pair<std::string, std::vector<std::shared_ptr<BaseEntityExp>>> lmPa
 
 
 
-EntityManager::EntityManager(sf::RenderWindow & window) : window(window), tiledBackground(1,30), tiledForeground(1, 30)
+EntityManager::EntityManager(sf::RenderWindow & window) : window(window), tiledBackground(1,30), tiledForeground(10, 300)
 {	
 }
 
