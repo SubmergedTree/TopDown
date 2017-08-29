@@ -39,7 +39,7 @@ void SpriteEntity::setTiledPosition(unsigned int xCoord, unsigned int yCoord, un
 
 	worldPosition = entityManager->fromTiledToWorldCoordinates(xCoord, yCoord, widthAmountOfTiles, heightAmountOfTiles);
 	
-	/*
+	
 	std::cout << "tiledPosition: " << "\n"
 		<< "x: " << tiledPosition.x << "\n"
 		<< "y: " << tiledPosition.y << "\n"
@@ -50,12 +50,12 @@ void SpriteEntity::setTiledPosition(unsigned int xCoord, unsigned int yCoord, un
 		<< "y: " << worldPosition.y << "\n"
 		<< "w: " << worldPosition.width << "\n"
 		<< "h: " << worldPosition.height << std::endl;
-	*/
+	
 	
 	sprite.setPosition(worldPosition.x, worldPosition.y);
 	setWidthHeight(worldPosition.width, worldPosition.height);
 
-	//std::cout << "dimensions from sprite" << getWidth() << " " << getHeight() << std::endl;
+	std::cout << "dimensions from sprite" << getWidth() << " " << getHeight() << std::endl;
 }
 
 

@@ -39,7 +39,6 @@ void Framework::run()
 	aet->setTag("AET");
 	aet->setTexture(*textureManager.getTexture("dragon"));
 	aet->setEntityManager(&entityManager);
-	aet->setTiledPosition(15,15,10,10);
 
 
 	std::vector<sf::IntRect> walkDown;
@@ -49,7 +48,7 @@ void Framework::run()
 	aet->storeAnimation("walkDown", walkDown);
 	aet->setDefault(sf::IntRect(0, 0, 100, 100));
 	aet->setSwitchAnimationTime(200);
-
+	aet->setTiledPosition(1, 1, 30, 30);
 	entityManager.insertEntity(aet);
 	//entityManager.insertEntity(p1);
 	//entityManager.insertEntity(p2);
