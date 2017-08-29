@@ -20,6 +20,8 @@ public:
 
 	void insertEntity(std::shared_ptr<BaseEntityExp> toInsert);
 	void testBla();
+
+	void setView(sf::View const & view);
 private:
 
 	void render();
@@ -35,6 +37,7 @@ private:
 	std::priority_queue<std::shared_ptr<BaseEntityExp>, std::vector<std::shared_ptr<BaseEntityExp>>, Comperator> renderSequence;
 	
 	sf::RenderWindow& window;
+	sf::View view;
 
 	TiledMap tiledForeground;
 	TiledMap tiledBackground;

@@ -9,6 +9,7 @@ typedef std::pair<std::string, std::vector<std::shared_ptr<BaseEntityExp>>> lmPa
 
 EntityManager::EntityManager(sf::RenderWindow & window) : window(window), tiledBackground(1,30), tiledForeground(1, 30)
 {
+	view.reset(sf::FloatRect(0, 0, window.getSize().x, window.getSize().y));
 }
 
 EntityManager::~EntityManager()
@@ -37,8 +38,14 @@ void EntityManager::testBla()
 	//std::cout << "Bla" << std::endl;
 }
 
+void EntityManager::setView(sf::View const & view)
+{
+	this->view = view;
+}
+
 void EntityManager::render()
 {
+	window.setView(view);
 	while (!renderSequence.empty())
 	{
 		window.draw(*renderSequence.top()->getSprite());
