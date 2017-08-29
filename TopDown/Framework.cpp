@@ -69,13 +69,21 @@ void Framework::run()
 		while (window->pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
+			{
 				window->close();
+			}
+		
+			if (event.type == sf::Event::Resized)
+			{
+
+			}
+				
 		}
 
 		oldTime = newTime;
 		newTime = clock.getElapsedTime().asMilliseconds();
 		deltaTime = newTime - oldTime;
-		//std::cout << newTime << std::endl;
+		
 		window->clear();
 		entityManager.update(deltaTime);
 		entityManager.render();

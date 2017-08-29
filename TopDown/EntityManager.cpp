@@ -8,8 +8,8 @@ typedef std::pair<std::string, std::vector<std::shared_ptr<BaseEntityExp>>> lmPa
 
 
 
-EntityManager::EntityManager(sf::RenderWindow & window) : window(window), tiledBackground(1,30), tiledForeground(10, 300)
-{
+EntityManager::EntityManager(sf::RenderWindow & window) : window(window), tiledBackground(1,30), tiledForeground(1, 30)
+{	
 }
 
 EntityManager::~EntityManager()
@@ -44,8 +44,11 @@ Coord EntityManager::fromTiledToWorldCoordinates(unsigned int xCoord, unsigned i
 	return tiledForeground.getRealCoordinates(xCoord, yCoord,widthAmountOfTiles, heightAmountOfTiles);
 }
 
+
+
 void EntityManager::render()
 {
+
 	while (!renderSequence.empty())
 	{
 		window.draw(*renderSequence.top()->getSprite());
