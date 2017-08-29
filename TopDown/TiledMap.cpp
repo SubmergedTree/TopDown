@@ -61,6 +61,11 @@ void TiledMap::insert(std::string key,unsigned int xCoord, unsigned int yCoord,u
 	}
 }
 
+void TiledMap::insert(std::string key,Coord & coord)
+{
+	insert(key, coord.x, coord.y, coord.width, coord.height);
+}
+
 void TiledMap::deletefromTiledMap(unsigned int xCoord, unsigned int yCoord, unsigned int widthAmountOfTiles, unsigned int heightAmountOfTiles)
 {
 	if (xCoord + widthAmountOfTiles > amountOfTiles && yCoord + heightAmountOfTiles > amountOfTiles)

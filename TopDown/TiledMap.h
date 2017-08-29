@@ -12,6 +12,8 @@ public:
 	~TiledMap();
 
 	void insert(std::string key, unsigned int xCoord, unsigned int yCoord, unsigned int widthAmountOfTiles, unsigned int heightAmountOfTiles);
+	void insert(std::string key,Coord& coord);
+
 	void deletefromTiledMap(unsigned int xCoord, unsigned int yCoord, unsigned int widthAmountOfTiles, unsigned int heightAmountOfTiles);
 
 	Direction collisionDirection(int xCoord, int yCoord);

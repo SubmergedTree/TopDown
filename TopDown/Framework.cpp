@@ -39,6 +39,7 @@ void Framework::run()
 	aet->setTag("AET");
 	aet->setTexture(*textureManager.getTexture("dragon"));
 	aet->setEntityManager(&entityManager);
+	aet->setTiledPosition(15,15,10,10);
 
 
 	std::vector<sf::IntRect> walkDown;
@@ -57,6 +58,11 @@ void Framework::run()
 	float newTime = 0;
 	float deltaTime;
 	sf::Clock clock;
+
+	sf::View view1;
+	view1.reset(sf::FloatRect(0, 0, 800, 600));
+	view1.setRotation(0);
+	window->setView(view1);
 
 	while (window->isOpen())
 	{

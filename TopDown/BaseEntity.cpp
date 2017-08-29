@@ -77,7 +77,7 @@ int BaseEntity::getHeight()
 
 
 
-BaseEntityExp::BaseEntityExp()
+BaseEntityExp::BaseEntityExp() : toDelete(false)
 {
 }
 
@@ -119,4 +119,14 @@ std::string & BaseEntityExp::getTag()
 void BaseEntityExp::setTag(const std::string & tag)
 {
 	this->tag = tag;
+}
+
+void BaseEntityExp::deleteEntity()
+{
+	toDelete = true;
+}
+
+bool BaseEntityExp::shouldBeDeleted()
+{
+	return toDelete;
 }

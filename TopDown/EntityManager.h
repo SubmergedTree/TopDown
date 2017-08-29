@@ -19,9 +19,9 @@ public:
 	~EntityManager();
 
 	void insertEntity(std::shared_ptr<BaseEntityExp> toInsert);
-	void testBla();
 
-	void setView(sf::View const & view);
+	Coord fromTiledToWorldCoordinates(unsigned int xCoord, unsigned int yCoord, unsigned int widthAmountOfTiles, unsigned int heightAmountOfTiles);
+
 private:
 
 	void render();
@@ -37,7 +37,6 @@ private:
 	std::priority_queue<std::shared_ptr<BaseEntityExp>, std::vector<std::shared_ptr<BaseEntityExp>>, Comperator> renderSequence;
 	
 	sf::RenderWindow& window;
-	sf::View view;
 
 	TiledMap tiledForeground;
 	TiledMap tiledBackground;
