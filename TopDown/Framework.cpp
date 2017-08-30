@@ -43,7 +43,7 @@ void Framework::run()
 
 	std::vector<sf::IntRect> walkDown;
 	walkDown.push_back(sf::IntRect(0, 0, 100, 100));
-	walkDown.push_back(sf::IntRect(100, 0, 100, 100));
+	walkDown.push_back(sf::IntRect(0, 0, 100, 100));
 	walkDown.push_back(sf::IntRect(200, 0, 100, 100));
 	aet->storeAnimation("walkDown", walkDown);
 	aet->setDefault(sf::IntRect(0, 0, 100, 100));

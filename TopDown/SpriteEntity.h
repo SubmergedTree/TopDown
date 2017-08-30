@@ -16,7 +16,7 @@ public:
 	bool isRenderable();
 	void setIsOnTileMap();
 	bool getIsOnTileMap();
-
+	sd
 	Coord& getTiledMapPosition();
 protected:
 	void setWidthHeight(int width, int height);
