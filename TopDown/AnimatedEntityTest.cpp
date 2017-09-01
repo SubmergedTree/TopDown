@@ -12,5 +12,4 @@ void AnimatedEntityTest::onCreate()
 void AnimatedEntityTest::update(float deltaTime)
 {
 	applyAnimation("walkDown");
-
 }
