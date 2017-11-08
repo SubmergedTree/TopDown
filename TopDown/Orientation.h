@@ -2,10 +2,10 @@
 
 struct Coord
 {
-	int x = 0;
-	int y = 0;
-	int width = 0;
-	int height = 0;
+	float x = 0;
+	float y = 0;
+	float width = 0;
+	float height = 0;
 };
 
 enum Direction

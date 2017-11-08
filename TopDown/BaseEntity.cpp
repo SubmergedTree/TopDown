@@ -86,6 +86,11 @@ void BaseEntityExp::setEntityManager(EntityManager * entityManager)
 	this->entityManager = entityManager;
 }
 
+void BaseEntityExp::setPathfinder(Pathfinding * pathfinder)
+{
+	this->pathfinder = pathfinder;
+}
+
 BaseEntityExp::~BaseEntityExp()
 {
 	entityManager = nullptr;

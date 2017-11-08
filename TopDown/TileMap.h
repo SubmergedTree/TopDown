@@ -14,6 +14,9 @@ public:
 	void insertTiledEntity(TiledEntity const& tiledEntity);
 	void deleteTiledEntity(sf::IntRect const& texturedArea);
 
+	int getTileSize();
+	sf::Vector2u& getAmountOfTiles();
+
 private:
 	void initTileMap();
 

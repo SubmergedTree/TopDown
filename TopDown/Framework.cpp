@@ -1,6 +1,7 @@
 #include "Framework.h"
 #include "player.h"
 #include "Obstacle.h"
+#include "Foe.h"
 //#include "AnimatedEntity.h"
 #include <SFML/Graphics.hpp>
 
@@ -11,6 +12,8 @@
 #include "TiledEntityTest.h"
 
 #include "TileMap.h"
+
+#include "Pathfinding.h"
 
 Framework::Framework()
 {
@@ -26,21 +29,33 @@ Framework::~Framework()
 
 void Framework::run()
 {
+	window->setVerticalSyncEnabled(true);
+	window->setFramerateLimit(60);
+	
+
 	TextureManager textureManager;
 	textureManager.loadTexture("images/dragonAnim.png", "dragon");
 	textureManager.loadTexture("images/bild.jpg", "stone");
 	textureManager.loadTexture("images/tileset.png", "tileset");
 	EntityManager entityManager(*window);
-	std::shared_ptr<Player> p1(std::make_shared<Player>(*textureManager.getTexture("dragon"), sf::Vector2f(1, 1),&entityManager));
+
+/*	std::shared_ptr<Player> p1(std::make_shared<Player>(*textureManager.getTexture("dragon"), sf::Vector2f(1, 1),&entityManager));
 	p1->setRenderPos(2);
 	std::shared_ptr<Obstacle> p2(std::make_shared<Obstacle>(*textureManager.getTexture("stone"), sf::Vector2f(3, 3), &entityManager));
 	p2->setRenderPos(1);
 
 	p2->setPosition(sf::Vector2f(100, 100));
+	*/
+
+
+
+
+	Pathfinding * pathfinder = new Pathfinding();
+	pathfinder->resetTiles(100, sf::Vector2u(6, 6));
 
 	std::shared_ptr<AnimatedEntityTest> aet(std::make_shared<AnimatedEntityTest>());
 	aet->setRenderPos(1);
-	aet->setTag("AET");
+	aet->setTag("player");
 	aet->setTexture(*textureManager.getTexture("dragon"));
 	aet->setEntityManager(&entityManager);
 
@@ -52,32 +67,68 @@ void Framework::run()
 	aet->storeAnimation("walkDown", walkDown);
 	aet->setDefault(sf::IntRect(0, 0, 100, 100));
 	aet->setSwitchAnimationTime(200);
-	aet->setPosition(100, 100);
-	aet->setWidthHeight(200, 200);
+	aet->setPosition(550, 210);
+	aet->setWidthHeight(50, 50);
 	entityManager.insertEntity(aet);
-	//entityManager.insertEntity(p1);
-	//entityManager.insertEntity(p2);
 
 
+	std::shared_ptr<Foe> foe(std::make_shared<Foe>());
+	foe->setTag("foe");
+	foe->setPathfinder(pathfinder);
+	foe->setRenderPos(1);
+	foe->setTexture(*textureManager.getTexture("stone"));
+	foe->setWidthHeight(50, 50);
+	foe->setPosition(220, 110);
+	foe->setEntityManager(&entityManager);
 
+	entityManager.insertEntity(foe);
+	
 	std::vector<sf::IntRect> subtexrects;
-	subtexrects.push_back(sf::IntRect(0,0,17,17));
 	subtexrects.push_back(sf::IntRect(17, 0,17,17));
 	subtexrects.push_back(sf::IntRect(0, 0,17,17));
 	subtexrects.push_back(sf::IntRect(34, 34,17,17));
 	subtexrects.push_back(sf::IntRect(0, 0,17,17));
 	subtexrects.push_back(sf::IntRect(34, 17,17,17));
-	//subtexrects.push_back(sf::IntRect(0, 0,17,17));
-	//subtexrects.push_back(sf::IntRect(0, 0,17,17));
-	//subtexrects.push_back(sf::IntRect(0, 0,17,17));
+	subtexrects.push_back(sf::IntRect(17, 0, 17, 17));
+	subtexrects.push_back(sf::IntRect(0, 0, 17, 17));
+	subtexrects.push_back(sf::IntRect(34, 34, 17, 17));
+	subtexrects.push_back(sf::IntRect(0, 0, 17, 17));
+	subtexrects.push_back(sf::IntRect(34, 17, 17, 17));
+	subtexrects.push_back(sf::IntRect(17, 0, 17, 17));
+	subtexrects.push_back(sf::IntRect(0, 0, 17, 17));
+	subtexrects.push_back(sf::IntRect(34, 34, 17, 17));
+	subtexrects.push_back(sf::IntRect(0, 0, 17, 17));
+	subtexrects.push_back(sf::IntRect(34, 17, 17, 17));
+	subtexrects.push_back(sf::IntRect(17, 0, 17, 17));
+	subtexrects.push_back(sf::IntRect(0, 0, 17, 17));
+	subtexrects.push_back(sf::IntRect(34, 34, 17, 17));
+	subtexrects.push_back(sf::IntRect(0, 0, 17, 17));
+	subtexrects.push_back(sf::IntRect(34, 17, 17, 17));
+	subtexrects.push_back(sf::IntRect(17, 0, 17, 17));
+	subtexrects.push_back(sf::IntRect(0, 0, 17, 17));
+	subtexrects.push_back(sf::IntRect(34, 34, 17, 17));
+	subtexrects.push_back(sf::IntRect(0, 0, 17, 17));
+	subtexrects.push_back(sf::IntRect(34, 17, 17, 17));
+	subtexrects.push_back(sf::IntRect(17, 0, 17, 17));
+	subtexrects.push_back(sf::IntRect(0, 0, 17, 17));
+	subtexrects.push_back(sf::IntRect(34, 34, 17, 17));
+	subtexrects.push_back(sf::IntRect(0, 0, 17, 17));
+	subtexrects.push_back(sf::IntRect(34, 17, 17, 17));
+	subtexrects.push_back(sf::IntRect(17, 0, 17, 17));
+	subtexrects.push_back(sf::IntRect(0, 0, 17, 17));
+	subtexrects.push_back(sf::IntRect(34, 34, 17, 17));
+	subtexrects.push_back(sf::IntRect(0, 0, 17, 17));
+	subtexrects.push_back(sf::IntRect(34, 17, 17, 17));
+	subtexrects.push_back(sf::IntRect(17, 0, 17, 17));
 
-	TileMap tilemap(*textureManager.getTexture("tileset"),sf::Vector2u(3,2),200, subtexrects);
+	TileMap tilemap(*textureManager.getTexture("tileset"),sf::Vector2u(6,6),100, subtexrects);
 	entityManager.setTileMap(&tilemap);
 
 	std::shared_ptr<TiledEntityTest> tet(std::make_shared<TiledEntityTest>());
 	tet->setEntityManager(&entityManager);
 	tet->setTag("TET");
-	tet->setTileMapArea(sf::IntRect(0, 0, 1, 2));
+	tet->setPathfinder(pathfinder);
+	tet->setTileMapArea(sf::IntRect(4, 1, 1, 2));
 	std::vector<std::vector<sf::IntRect>> subTextures;
 	std::vector<sf::IntRect> v1;
 	v1.push_back(sf::IntRect(17, 17, 17, 17));
@@ -88,9 +139,7 @@ void Framework::run()
 
 	entityManager.insertEntity(tet);
 
-	float oldTime = 0;
-	float newTime = 0;
-	float deltaTime;
+
 	sf::Clock clock;
 
 	sf::View view1;
@@ -115,12 +164,12 @@ void Framework::run()
 				
 		}
 
-		oldTime = newTime;
-		newTime = clock.getElapsedTime().asMilliseconds();
-		deltaTime = newTime - oldTime;
+		sf::Time deltaTime = clock.getElapsedTime();
 		
 		window->clear();
-		entityManager.update(deltaTime);
+		//std::cout << ((float)deltaTime.asMicroseconds()) / 1000.0f << std::endl;
+		entityManager.update(((float)deltaTime.asMicroseconds()) / 1000.0f);
+		clock.restart().asMicroseconds();
 		window->draw(tilemap);
 		entityManager.render();
 		window->display();

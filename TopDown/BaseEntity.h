@@ -5,6 +5,7 @@
 #include <string>
 
 #include "EntityManager.h"
+#include "Pathfinding.h"
 
 class BaseEntity
 {
@@ -48,6 +49,7 @@ public:
 	BaseEntityExp();
 
 	void setEntityManager(EntityManager* entityManager);
+	void setPathfinder(Pathfinding* pathfinder);
 
 	virtual ~BaseEntityExp();
 
@@ -66,6 +68,7 @@ public:
 protected:
 	virtual void update(float deltaTime) = 0;
 	EntityManager* entityManager;
+	Pathfinding* pathfinder;
 private:
 	std::string tag;
 	bool toDelete;

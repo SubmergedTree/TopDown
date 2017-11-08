@@ -3,14 +3,15 @@
 #include "BaseEntity.h"
 #include "SpriteEntity.h"
 #include "TiledEntity.h"
-
+//#include "Util.h"
 
 typedef std::pair<std::string, std::vector<std::shared_ptr<BaseEntityExp>>> lmPair;
 
 
 
 
-EntityManager::EntityManager(sf::RenderWindow & window) : window(window), tiledBackground(1,30), tiledForeground(10, 300)
+EntityManager::EntityManager(sf::RenderWindow & window) : 
+	window(window)
 {	
 }
 
@@ -33,29 +34,27 @@ void EntityManager::insertEntity(std::shared_ptr<BaseEntityExp> toInsert)
 		entities.insert(lmPair(toInsert->getTag(),newVector));
 	}
 
-	if (toInsert->isRenderable())
-	{
-		//std::shared_ptr<SpriteEntity> spriteEntity = std::static_pointer_cast<SpriteEntity>(toInsert);
-		//Coord tmpCoord = spriteEntity->getTiledMapPosition();
-		//tiledForeground.insert(toInsert->getTag(),tmpCoord);
-	}
-
 	if (toInsert->isTiled())
 	{
-		std::shared_ptr<TiledEntity> tE = std::static_pointer_cast<TiledEntity>(toInsert);
+		std::shared_ptr<TiledEntity> tE = util::downcastShrdPtr<TiledEntity, BaseEntityExp>(toInsert);
 		tileMap->insertTiledEntity(*tE.get());
 	}
 }
 
-Coord EntityManager::fromTiledToWorldCoordinates(unsigned int xCoord, unsigned int yCoord, unsigned int widthAmountOfTiles, unsigned int heightAmountOfTiles)
-{
-	return tiledForeground.getRealCoordinates(xCoord, yCoord,widthAmountOfTiles, heightAmountOfTiles);
-}
-
-
 void EntityManager::setTileMap(TileMap* tM)
 {
 	this->tileMap = tM;
+}
+
+std::vector<std::shared_ptr<BaseEntityExp>> EntityManager::find(std::string key)
+{
+	auto it = entities.find(key);
+	if (it != entities.end())
+	{
+		return it->second;
+	}
+	
+	return std::vector<std::shared_ptr<BaseEntityExp>>();
 }
 
 

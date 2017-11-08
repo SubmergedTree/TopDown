@@ -9,11 +9,19 @@
 #include "Framework.h"
 #include "TiledMap.h"
 #include "TileMap.h"
+//#include "Util.h"
+#include <exception>
 
 class BaseEntityExp;
 
-
-
+namespace util
+{
+	template<typename SHOULD, typename IS>
+	std::shared_ptr<SHOULD> downcastShrdPtr(std::shared_ptr<IS> isPtr)
+	{
+		return std::static_pointer_cast<SHOULD>(isPtr);
+	}
+}
 
 class EntityManager
 {
@@ -24,9 +32,20 @@ public:
 
 	void insertEntity(std::shared_ptr<BaseEntityExp> toInsert);
 
-	Coord fromTiledToWorldCoordinates(unsigned int xCoord, unsigned int yCoord, unsigned int widthAmountOfTiles, unsigned int heightAmountOfTiles);
-
 	void setTileMap(TileMap* tM);
+
+	//use unique ptr ? 
+	std::vector<std::shared_ptr<BaseEntityExp>> find(std::string key);
+
+	template<class TOCAST>
+	std::shared_ptr<TOCAST> findSingle(std::string key)
+	{
+		std::vector<std::shared_ptr<BaseEntityExp>> ret = find(key);
+		if (!ret.empty())
+			return util::downcastShrdPtr<TOCAST, BaseEntityExp>(ret[0]);
+		else
+			throw std::runtime_error("can't find entity");
+	}
 
 private:
 
@@ -44,11 +63,6 @@ private:
 	std::priority_queue<std::shared_ptr<BaseEntityExp>, std::vector<std::shared_ptr<BaseEntityExp>>, Comperator> renderSequence;
 	
 	sf::RenderWindow& window;
-
-	TiledMap tiledForeground;
-	TiledMap tiledBackground;
-
-
 	TileMap* tileMap;
 };
 

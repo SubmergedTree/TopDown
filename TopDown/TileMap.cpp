@@ -33,7 +33,7 @@ void TileMap::insertTiledEntity(TiledEntity const& tiledEntity)
 		{
 			sf::Vertex* quad = &vertices[(x + y * amountOfTiles.x) * VERTICESPERQUAD];
 			//sf::Vertex* quad = &vertices[(tiledEntity.tileMapArea.left + x + tiledEntity.tileMapArea.top +y * amountOfTiles.x) * 4];
-			quad->color = sf::Color::Blue;
+			//quad->color = sf::Color::Blue;
 
 			int texCoordX = x - left;
 			int texCoordY = y - top;
@@ -63,6 +63,16 @@ void TileMap::deleteTiledEntity(sf::IntRect const & texturedArea)
 
 			subTexIndex++;
 		}
+}
+
+int TileMap::getTileSize()
+{
+	return tileSize;
+}
+
+sf::Vector2u & TileMap::getAmountOfTiles()
+{
+	return amountOfTiles;
 }
 
 //TODO: control size of vector

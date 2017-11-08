@@ -17,6 +17,12 @@ public:
 
 	void setWidthHeight(int width, int height);
 
+	void move(sf::Vector2f distance);
+	void move(int distanceX, int distanceY);
+	void moveWaypoints(std::list<sf::Vector2f> & waypoints, float deltaTime, float speed);
+
+	sf::Vector2f getPosition();
+
 protected:
 
 	int getWidth();
@@ -27,6 +33,5 @@ protected:
 	Coord worldPosition;
 private:
 	int renderPos;
-	bool isOnTileMap;
 };
 
